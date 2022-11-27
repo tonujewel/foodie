@@ -17,18 +17,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<LoadRestaurantDataEvent>((event, emit) async {
       emit(HomeLoadingState());
 
-        // final restaurantData = await _repository.getJoke();
-        // log("try $restaurantData");
-        // emit(HomeLoadedState(restaurantData.result?.data ?? []));
-
-        (await _repository.loginApiCall()).fold((ErrorDm errorDm) {
-          //error
-          log("errors ${errorDm.message}");
-        }, (UserDm userDm) {
-          // success
-          log("successs ${userDm.data?.firstName}");
-        });
-     
+      (await _repository.getRestaurant()).fold((ErrorDm errorDm) {
+        //error
+        log("errors ${errorDm.message}");
+        emit(HomeErrorState("${errorDm.message}"));
+      }, (RestaurantDm restaurantData) {
+        // success
+        log("successs ${restaurantData.result?.data}");
+        emit(HomeLoadedState(restaurantData.result?.data ?? []));
+      });
     });
   }
 }

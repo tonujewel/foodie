@@ -9,5 +9,5 @@ class Url {
   static const signInURL = "${baseUrl}login";
 
   //restaurant data
-  static const getResataurantDataUrl = "${baseUrl}resta urant/list";
+  static const getResataurantDataUrl = "${baseUrl}restaurant/list";
 }

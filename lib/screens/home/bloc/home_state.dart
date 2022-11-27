@@ -8,7 +8,7 @@ class HomeLoadingState extends HomeState {
 }
 
 class HomeLoadedState extends HomeState {
-  List<RestaurantData> restaurantList = [];
+  final List<RestaurantData> restaurantList;
 
   HomeLoadedState(this.restaurantList);
   @override

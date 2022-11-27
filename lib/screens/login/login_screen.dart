@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodie/data/repository/login_repository.dart';
@@ -23,8 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    emailController.text = "tonujewel@gmail.com";
-    passwordController.text = "123456";
+    if (kDebugMode) {
+      emailController.text = "tonujewel@gmail.com";
+      passwordController.text = "123456";
+    }
+
     super.initState();
   }
 

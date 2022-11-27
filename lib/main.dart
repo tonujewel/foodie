@@ -13,21 +13,21 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Restaurant App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MultiRepositoryProvider(
-        providers: [
-          RepositoryProvider(create: (context) => LoginRepository()),
-          RepositoryProvider(create: (context) => RestaurantRepository()),
-          // RepositoryProvider(create: (context) => ConnectivityService()),
-          // RepositoryProvider(create: (context) => ApiProvider()),
-          // RepositoryProvider(create: (context) => ImageService()),
-        ],
-        child: const LoginScreen(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => LoginRepository()),
+        RepositoryProvider(create: (context) => RestaurantRepository()),
+        // RepositoryProvider(create: (context) => ConnectivityService()),
+        // RepositoryProvider(create: (context) => ApiProvider()),
+        // RepositoryProvider(create: (context) => ImageService()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Restaurant App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const LoginScreen(),
       ),
     );
   }
