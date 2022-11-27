@@ -34,14 +34,50 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // loaded
               if (state is HomeLoadedState) {
-                return ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: SizeManager.GAP_BIG,
-                        vertical: SizeManager.GAP_REGULAR),
-                    itemCount: state.restaurantList.length,
-                    itemBuilder: (context, index) {
-                      return RestaurantItem(data: state.restaurantList[index]);
-                    });
+                return Column(
+                  children: [
+                    Flexible(
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: SizeManager.GAP_BIG,
+                            vertical: SizeManager.GAP_REGULAR),
+                        itemCount: state.restaurantList.length,
+                        itemBuilder: (context, index) {
+                          return RestaurantItem(
+                              data: state.restaurantList[index]);
+                        },
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,
+                          crossAxisSpacing: 16,
+                          childAspectRatio: 2,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: SizeManager.GAP_BIG,
+                            vertical: SizeManager.GAP_REGULAR),
+                        itemCount: state.restaurantList.length,
+                        itemBuilder: (context, index) {
+                          return RestaurantItem(
+                              data: state.restaurantList[index]);
+                        },
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,
+                          crossAxisSpacing: 16,
+                          childAspectRatio: 2,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
               }
 
               // error
