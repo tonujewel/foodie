@@ -6,5 +6,5 @@ abstract class HomeEvent extends Equatable {
 
 class LoadRestaurantDataEvent extends HomeEvent {
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }

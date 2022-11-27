@@ -16,7 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(this._repository) : super(HomeLoadingState()) {
     on<LoadRestaurantDataEvent>((event, emit) async {
       emit(HomeLoadingState());
-      try {
+
         // final restaurantData = await _repository.getJoke();
         // log("try $restaurantData");
         // emit(HomeLoadedState(restaurantData.result?.data ?? []));
@@ -28,10 +28,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           // success
           log("successs ${userDm.data?.firstName}");
         });
-      } catch (e) {
-        // log("catch $e");
-        emit(HomeErrorState(e.toString()));
-      }
+     
     });
   }
 }
