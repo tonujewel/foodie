@@ -44,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // error
             if (state is HomeErrorState) {
-              return const Center(
-                child: Text("Something went wrong"),
+              return Center(
+                child: Text("Something went wrong ${state.error}"),
               );
             }
 
