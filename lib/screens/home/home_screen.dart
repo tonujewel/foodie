@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodie/data/repository/restaurant_repository.dart';
 import 'package:foodie/resources/color_manager.dart';
+import '../../utils/helper.dart';
 import 'bloc/home_bloc.dart';
 import 'items/restaurant_item.dart';
 
@@ -25,12 +26,18 @@ class _HomeScreenState extends State<HomeScreen> {
           create: (context) => HomeBloc(
             RepositoryProvider.of<RestaurantRepository>(context),
           )..add(LoadRestaurantDataEvent()),
-          child: BlocBuilder<HomeBloc, HomeState>(
+          child: BlocConsumer<HomeBloc, HomeState>(
+            listener: (context, state) {
+              if (state is HomeLoadingState) {
+                AppHelper.loadingDialog(context: context);
+              }
+
+              if (state is HomeLoadedState) {
+                Navigator.pop(context);
+              }
+            },
             builder: (context, state) {
               // loading
-              if (state is HomeLoadingState) {
-                return const Center(child: CircularProgressIndicator());
-              }
 
               // loaded
               if (state is HomeLoadedState) {
