@@ -18,8 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: ColorManager.backgroundColor,
-      appBar: AppBar(title: const Text("Home"), elevation: 0),
-      bottomNavigationBar: const BottomNavigation(),
       body: RepositoryProvider(
         create: (context) =>
             RepositoryProvider.of<RestaurantRepository>(context),
@@ -86,90 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-        boxShadow: [
-          BoxShadow(
-            offset: const Offset(0, 1),
-            blurRadius: 5,
-            color: Colors.black.withOpacity(0.3),
-          ),
-        ],
-      ),
-      height: 80,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
-          BottomItem(
-            name: "Explore",
-            icon: "assets/icon/search.png",
-            isSelected: true,
-          ),
-          BottomItem(
-            name: "History",
-            icon: "assets/icon/history.png",
-            isSelected: false,
-          ),
-          BottomItem(
-            name: "Saved",
-            icon: "assets/icon/love.png",
-            isSelected: false,
-          ),
-          BottomItem(
-            name: "Profile",
-            icon: "assets/icon/search.png",
-            isSelected: false,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class BottomItem extends StatelessWidget {
-  const BottomItem({
-    Key? key,
-    required this.name,
-    required this.icon,
-    required this.isSelected,
-  }) : super(key: key);
-
-  final String name, icon;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(
-          icon,
-          height: 25,
-          width: 25,
-          color: isSelected ? ColorManager.primaryBlueColor : Colors.black,
-        ),
-        const SizedBox(height: 10),
-        Text(
-          name,
-          style: TextStyle(
-            color: isSelected ? ColorManager.primaryBlueColor : Colors.black,
-          ),
-        )
-      ],
     );
   }
 }
