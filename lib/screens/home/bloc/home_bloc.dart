@@ -18,14 +18,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(HomeLoadingState());
 
       (await _repository.getRestaurant()).fold((ErrorDm errorDm) {
-        //error
-        log("errors ${errorDm.message}");
         emit(HomeErrorState("${errorDm.message}"));
       }, (RestaurantDm restaurantData) {
-        // success
-        log("successs ${restaurantData.result?.data}");
         emit(HomeLoadedState(restaurantData.result?.data ?? []));
       });
+    });
+
+    on<BottomNavigationClickEvent>((event, emit) {
+      //
     });
   }
 }
