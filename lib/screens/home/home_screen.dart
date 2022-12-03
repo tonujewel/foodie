@@ -4,6 +4,7 @@ import 'package:foodie/data/model/home_module_dm.dart';
 import 'package:foodie/data/repository/restaurant_repository.dart';
 import 'package:foodie/resources/color_manager.dart';
 import 'package:foodie/resources/string_manager.dart';
+import 'package:foodie/screens/food_delivery/food_delivery_screen.dart';
 import '../../utils/helper.dart';
 import 'bloc/home_bloc.dart';
 import 'items/restaurant_item.dart';
@@ -36,6 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
               if (state is HomeLoadedState) {
                 Navigator.pop(context);
+              }
+
+              if (state is HomeErrorState) {
+                    Navigator.pop(context);
               }
             },
             builder: (context, state) {
@@ -177,21 +182,31 @@ class HomeModuleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              moduleDm.imageUrl,
-              height: 40,
-            ),
-            const SizedBox(height: 10),
-            Text(moduleDm.title),
-          ],
+    return InkWell(
+      onTap: () {
+        if (moduleDm.title == "Delivery") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const FoodDeliveryScreen()));
+        }
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                moduleDm.imageUrl,
+                height: 40,
+              ),
+              const SizedBox(height: 10),
+              Text(moduleDm.title),
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodie/data/repository/food_delivery_repository.dart';
 import 'package:foodie/data/repository/login_repository.dart';
 import 'package:foodie/resources/color_palette.dart';
 import 'package:foodie/screens/base_screen/base_screen.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (context) => LoginRepository()),
         RepositoryProvider(create: (context) => RestaurantRepository()),
+        RepositoryProvider(create: (context) => FoodDeliveryRepository()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -10,4 +10,6 @@ class Url {
 
   //restaurant data
   static const getResataurantDataUrl = "${baseUrl}restaurant/list";
+
+
 }

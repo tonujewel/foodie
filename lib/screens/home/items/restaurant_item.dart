@@ -106,6 +106,7 @@ class RestaurantItem extends StatelessWidget {
               )),
             ),
           ),
+       
         ],
       ),
     );
