@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodie/data/model/home_module_dm.dart';
 import 'package:foodie/data/repository/restaurant_repository.dart';
 import 'package:foodie/resources/color_manager.dart';
+import 'package:foodie/resources/string_manager.dart';
 import '../../utils/helper.dart';
 import 'bloc/home_bloc.dart';
 import 'items/restaurant_item.dart';
@@ -16,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
+    // var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: ColorManager.backgroundColor,
       body: RepositoryProvider(
@@ -37,8 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
             builder: (context, state) {
-              // loading
-
               // loaded
               if (state is HomeLoadedState) {
                 return Padding(
@@ -49,8 +49,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(height: 20),
                         const SearchWdiget(),
                         const SizedBox(height: 10),
+                        GridView.builder(
+                            itemCount: StringManager.homeModuleList.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 2 / 1.4),
+                            itemBuilder: ((context, index) {
+                              return HomeModuleWidget(
+                                  moduleDm:
+                                      StringManager.homeModuleList[index]);
+                            })),
+                        const SizedBox(height: 10),
                         SizedBox(
-                          height: height * .06,
+                          height: 50,
                           child: ListView.builder(
                               shrinkWrap: true,
                               itemCount: 5,
@@ -63,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SectionTitleWidget(),
                         const SizedBox(height: 10),
                         SizedBox(
-                          height: height * .32,
+                          height: 230,
                           child: ListView.builder(
                               shrinkWrap: true,
                               itemCount: state.restaurantList.length,
@@ -146,6 +160,37 @@ class CategoryWidget extends StatelessWidget {
             const SizedBox(width: 10),
             const Text("Restaurant"),
             const SizedBox(width: 5),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomeModuleWidget extends StatelessWidget {
+  const HomeModuleWidget({
+    Key? key,
+    required this.moduleDm,
+  }) : super(key: key);
+
+  final HomeModuleDm moduleDm;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              moduleDm.imageUrl,
+              height: 40,
+            ),
+            const SizedBox(height: 10),
+            Text(moduleDm.title),
           ],
         ),
       ),

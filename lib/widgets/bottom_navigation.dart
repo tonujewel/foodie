@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 import '../resources/color_manager.dart';
 
 class BottomNavigation extends StatefulWidget {
-  BottomNavigation({
+  const BottomNavigation({
     Key? key,
     required this.ontap,
   }) : super(key: key);
@@ -62,7 +61,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ),
           BottomItem(
             name: "Profile",
-            icon: "assets/icon/search.png",
+            icon: "assets/icon/user.png",
             isSelected: selectedIndex == 3 ? true : false,
             onClick: () {
               tapTest(3);
