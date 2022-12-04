@@ -16,8 +16,8 @@ class RestaurantItem extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Stack(
         children: [
-          SizedBox(
-            width: 240,
+          Container(
+            padding:const EdgeInsets.only(bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -106,7 +106,6 @@ class RestaurantItem extends StatelessWidget {
               )),
             ),
           ),
-       
         ],
       ),
     );

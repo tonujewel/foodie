@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               }
 
               if (state is HomeErrorState) {
-                    Navigator.pop(context);
+                Navigator.pop(context);
               }
             },
             builder: (context, state) {
@@ -81,17 +81,30 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(height: 10),
                         const SectionTitleWidget(),
                         const SizedBox(height: 10),
-                        SizedBox(
-                          height: 230,
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: state.restaurantList.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return RestaurantItem(
-                                    data: state.restaurantList[index]);
-                              }),
+                        // SizedBox(
+                        //   height: 230,
+                        //   child: ListView.builder(
+                        //       shrinkWrap: true,
+                        //       itemCount: state.restaurantList.length,
+                        //       scrollDirection: Axis.horizontal,
+                        //       itemBuilder: (context, index) {
+                        //         return RestaurantItem(
+                        //             data: state.restaurantList[index]);
+                        //       }),
+                        // ),
+
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Wrap(
+                            children: List.generate(
+                                state.restaurantList.length,
+                                (index) => RestaurantItem(
+                                  data: state.restaurantList[index],
+                                )),
+                          ),
                         ),
+
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
