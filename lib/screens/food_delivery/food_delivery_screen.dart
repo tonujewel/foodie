@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodie/data/model/restaurant_dm.dart';
 import 'package:foodie/data/repository/food_delivery_repository.dart';
-
 import '../../resources/color_manager.dart';
 import '../../utils/helper.dart';
 import 'bloc/food_delivery_bloc.dart';
@@ -18,7 +17,10 @@ class FoodDeliveryScreen extends StatelessWidget {
       create: (context) =>
           FoodDeliveryBloc(FoodDeliveryRepository())..add(FetchFoodDelivery()),
       child: Scaffold(
-        appBar: AppBar(title: const Text("Food delivery")),
+        appBar: AppBar(
+          title: const Text("Food delivery"),
+          elevation: 0,
+        ),
         body: FoodDeliveryBody(),
       ),
     );
@@ -33,51 +35,68 @@ class FoodDeliveryBody extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
   List<RestaurantData> result = [];
 
+  bool isLoading = false;
+
+  bool isLoadFirstTime = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<FoodDeliveryBloc, FoodDeliveryState>(
       listener: (context, state) {
         if (state is FoodDeliveryLoading) {
-          //  AppHelper.loadingDialog(context: context);
+          if (!isLoadFirstTime) {
+            AppHelper.loadingDialog(context: context);
+          }
         }
 
         if (state is FoodDeliveryLoaded) {
+          if (state.restaurantList.length > result.length) {
+            isLoading = false;
+          }
           result = state.restaurantList;
 
-          //  Navigator.pop(context);
+          if (!isLoadFirstTime) {
+            Navigator.pop(context);
+            isLoadFirstTime = true;
+          }
         }
 
         if (state is FoodDeliveryError) {
-          //  Navigator.pop(context);
+          if (!isLoadFirstTime) {
+            Navigator.pop(context);
+            isLoadFirstTime = true;
+          }
         }
         return;
       },
       builder: (context, state) {
         return GridView.builder(
-            controller: _scrollController
-              ..addListener(() {
-                if (_scrollController.offset ==
-                    _scrollController.position.maxScrollExtent) {
-                  // context.bloc<BeerBloc>()
-                  //   ..isFetching = true
-                  //   ..add(BeerFetchEvent());
+          controller: _scrollController
+            ..addListener(() {
+              if (_scrollController.position.pixels.toInt() >
+                  _scrollController.position.maxScrollExtent.toInt() * .5) {
+                if (!isLoading) {
+                  log("Big");
+                  isLoading = true;
                   BlocProvider.of<FoodDeliveryBloc>(context)
                       .add(FetchFoodDelivery());
                 }
-              }),
-            padding: const EdgeInsets.all(20),
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 3 / 3.5,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10),
-            itemCount: result.length,
-            itemBuilder: (BuildContext ctx, index) {
-              return FoodDeliveryItem(
-                data: result[index],
-              );
-            });
+              }
+            }),
+          padding: const EdgeInsets.all(20),
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 300,
+              childAspectRatio: 3 / 3.3,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10),
+          itemCount: result.length,
+          itemBuilder: (BuildContext ctx, index) {
+            return FoodDeliveryItem(
+              data: result[index],
+            );
+          },
+        );
       },
     );
   }
@@ -107,8 +126,8 @@ class FoodDeliveryItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: SizedBox(
                   child: FadeInImage.assetNetwork(
-                    height: 130,
-                    // width: 240,
+                    height: 100,
+                    width: 240,
                     fit: BoxFit.cover,
                     placeholder: "assets/images/loader.gif",
                     image: imageUrl,

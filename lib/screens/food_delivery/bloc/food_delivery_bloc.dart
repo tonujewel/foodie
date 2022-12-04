@@ -24,7 +24,6 @@ class FoodDeliveryBloc extends Bloc<FoodDeliveryEvent, FoodDeliveryState> {
         emit(FoodDeliveryError("${errorDm.message}"));
       }, (RestaurantDm restaurantData) {
         result = result + (restaurantData.result?.data ?? []);
-        log("${result.length}");
         emit(FoodDeliveryLoaded(result));
         page++;
       });
