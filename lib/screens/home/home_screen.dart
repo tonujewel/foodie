@@ -19,9 +19,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: ColorManager.backgroundColor,
+      // backgroundColor: ColorManager.backgroundColor,
       body: RepositoryProvider(
         create: (context) =>
             RepositoryProvider.of<RestaurantRepository>(context),
@@ -81,29 +80,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(height: 10),
                         const SectionTitleWidget(),
                         const SizedBox(height: 10),
-                        // SizedBox(
-                        //   height: 230,
-                        //   child: ListView.builder(
-                        //       shrinkWrap: true,
-                        //       itemCount: state.restaurantList.length,
-                        //       scrollDirection: Axis.horizontal,
-                        //       itemBuilder: (context, index) {
-                        //         return RestaurantItem(
-                        //             data: state.restaurantList[index]);
-                        //       }),
-                        // ),
-
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Wrap(
                             children: List.generate(
                                 state.restaurantList.length,
                                 (index) => RestaurantItem(
-                                  data: state.restaurantList[index],
-                                )),
+                                      data: state.restaurantList[index],
+                                    )),
                           ),
                         ),
-
                         const SizedBox(height: 20),
                       ],
                     ),
@@ -135,19 +121,16 @@ class SectionTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
-        Text(
-          "Popular restaurants",
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-        ),
-        Spacer(),
-        Text(
+      children: [
+        Text("Popular restaurants",
+            style: Theme.of(context).textTheme.headline6),
+        const Spacer(),
+        const Text(
           "View all",
           style: TextStyle(color: ColorManager.primaryBlueColor, fontSize: 16),
         ),
-        SizedBox(width: 10),
-        Icon(
+        const SizedBox(width: 10),
+        const Icon(
           Icons.arrow_forward_ios,
           size: 15,
           color: ColorManager.primaryBlueColor,
@@ -234,7 +217,6 @@ class SearchWdiget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
       shape: const StadiumBorder(),
       child: Padding(
         padding: const EdgeInsets.all(10.0),

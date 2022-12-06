@@ -20,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).backgroundColor,
         borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10), topRight: Radius.circular(10)),
         boxShadow: [
@@ -106,13 +106,14 @@ class BottomItem extends StatelessWidget {
             icon,
             height: 25,
             width: 25,
-            color: isSelected ? ColorManager.primaryBlueColor : Colors.black,
+            color: isSelected ? Theme.of(context).primaryColor : Theme.of(context).highlightColor,
           ),
           const SizedBox(height: 10),
           Text(
             name,
+            
             style: TextStyle(
-              color: isSelected ? ColorManager.primaryBlueColor : Colors.black,
+              color: isSelected ? Theme.of(context).primaryColor : Theme.of(context).highlightColor,
             ),
           )
         ],
