@@ -8,30 +8,48 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  //
-                  BlocProvider.of<MyAppBloc>(context)
-                      .add(const ChangeThemeEvent(false));
-                },
-                child: Text(
-                  "Dart mode",
-                  style: Theme.of(context).textTheme.headline6,
-                )),
-            ElevatedButton(
-                onPressed: () {
-                  BlocProvider.of<MyAppBloc>(context)
-                      .add(const ChangeThemeEvent(true));
-                },
-                child: Text(
-                  "Light mode",
-                  style: Theme.of(context).textTheme.headline6,
-                )),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        child: Center(
+          child: Column(
+            children: [
+              Card(
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const Text("Change theme"),
+                    const Spacer(),
+                    Switch(
+                        value: true,
+                        onChanged: (val) {
+//
+                        })
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    //
+                    BlocProvider.of<MyAppBloc>(context)
+                        .add(const ChangeThemeEvent(false));
+                  },
+                  child: Text(
+                    "Dart mode",
+                    style: Theme.of(context).textTheme.headline6,
+                  )),
+              ElevatedButton(
+                  onPressed: () {
+                    BlocProvider.of<MyAppBloc>(context)
+                        .add(const ChangeThemeEvent(true));
+                  },
+                  child: Text(
+                    "Light mode",
+                    style: Theme.of(context).textTheme.headline6,
+                  )),
+            ],
+          ),
         ),
       ),
     );
