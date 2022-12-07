@@ -29,15 +29,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           (await _repository.loginApiCall(event.email, event.password)).fold(
               (ErrorDm errorDm) {
             //error
-            log("errors ${errorDm.message}");
+          
             emit(LoginErrorState("${errorDm.message}"));
           }, (UserDm userDm) {
             // success
-            log("successs ${userDm.data?.firstName}");
+            
             emit(LoginSuccessState());
           });
         } catch (e) {
-          // log("catch $e");
+      
           emit(LoginErrorState(e.toString()));
         }
       } else {

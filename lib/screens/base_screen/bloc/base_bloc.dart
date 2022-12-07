@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -12,7 +11,7 @@ class BaseBloc extends Bloc<BaseEvent, BaseState> {
     });
 
     on<BottomNavigationClickEvent>((event, emit) {
-      log("${event.index}");
+
       if (event.index == 0) {
         emit(const ExploreState("Explore"));
       }

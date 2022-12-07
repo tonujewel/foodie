@@ -76,7 +76,7 @@ class FoodDeliveryBody extends StatelessWidget {
               if (_scrollController.position.pixels.toInt() >
                   _scrollController.position.maxScrollExtent.toInt() * .5) {
                 if (!isLoading) {
-                  log("Big");
+               
                   isLoading = true;
                   BlocProvider.of<FoodDeliveryBloc>(context)
                       .add(FetchFoodDelivery());
@@ -147,7 +147,7 @@ class FoodDeliveryItem extends StatelessWidget {
                       "${data.title}",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.subtitle1,
                     ),
                     const SizedBox(height: 10),
                     Row(

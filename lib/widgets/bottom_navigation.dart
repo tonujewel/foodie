@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../resources/color_manager.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({
@@ -37,7 +36,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         children: [
           BottomItem(
             name: "Explore",
-            icon: "assets/icon/search.png",
+            icon: "assets/icon/home.png",
             isSelected: selectedIndex == 0 ? true : false,
             onClick: () {
               tapTest(0);
@@ -106,14 +105,17 @@ class BottomItem extends StatelessWidget {
             icon,
             height: 25,
             width: 25,
-            color: isSelected ? Theme.of(context).primaryColor : Theme.of(context).highlightColor,
+            color: isSelected
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).highlightColor,
           ),
           const SizedBox(height: 10),
           Text(
             name,
-            
             style: TextStyle(
-              color: isSelected ? Theme.of(context).primaryColor : Theme.of(context).highlightColor,
+              color: isSelected
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).highlightColor,
             ),
           )
         ],

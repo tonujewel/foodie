@@ -42,8 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ..add(RegisterServiceEvents()),
         child: BlocConsumer<LoginBloc, LoginState>(
           listener: (context, state) {
-            log("$state");
-
+      
             if (state is LoginLoadingState) {
               AppHelper.loadingDialog(context: context);
             }

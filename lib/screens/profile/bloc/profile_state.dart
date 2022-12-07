@@ -4,19 +4,20 @@ abstract class ProfileState extends Equatable {
   const ProfileState();
 }
 
-class ProfileInitial extends ProfileState {
-  String? text;
-
-  ProfileInitial({this.text});
-
+class ProfileLoadingState extends ProfileState{
   @override
-  List<Object?> get props => [text];
+  List<Object?> get props => [];
 }
 
-class ProfileThemeChangeState extends ProfileState {
-  final bool isDark;
+class ProfileLoadedState extends ProfileState {
+  String? text;
+  final bool isDarkMode;
 
-  const ProfileThemeChangeState(this.isDark);
+  ProfileLoadedState({
+    this.text,
+    required this.isDarkMode,
+  });
+
   @override
-  List<Object?> get props => [isDark];
+  List<Object?> get props => [text, isDarkMode];
 }

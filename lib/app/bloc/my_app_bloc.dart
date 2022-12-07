@@ -14,7 +14,7 @@ class MyAppBloc extends Bloc<MyAppEvent, MyAppState> {
     on<MyAppEvent>((event, emit) {});
 
     on<ChangeThemeEvent>((event, emit) {
-      emit(MyAppInitial(_repository.getTheme(event.isLightTheme)));
+      emit(MyAppInitial(_repository.getTheme(event.isDarkTheme)));
     });
   }
 }

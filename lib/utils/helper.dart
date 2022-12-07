@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class AppHelper {
 // warning
@@ -36,8 +37,11 @@ class AppHelper {
         height: 50,
         width: 50,
         child: AlertDialog(
-          content: Image.asset(
-            "assets/images/loader.gif",
+          backgroundColor: Theme.of(context).backgroundColor,
+          content: Lottie.asset(
+            
+            "assets/lottie_json/loading.json",
+          
           ),
         ),
       ),

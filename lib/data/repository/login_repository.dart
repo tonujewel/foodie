@@ -24,7 +24,7 @@ class LoginRepository {
 
     if (response.toString().contains(AppConstant.errorString)) {
       ErrorDm errorDm = errorDmFromJson(response);
-      // log("errorDm :::  ${errorDm.message}");
+    
       return Left(errorDm);
     } else {
       UserDm userDm = userDmFromJson(response);
