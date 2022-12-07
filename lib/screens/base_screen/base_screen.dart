@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodie/resources/color_manager.dart';
 import 'package:foodie/screens/history/history_screen.dart';
 import 'package:foodie/screens/home/home_screen.dart';
 import 'package:foodie/screens/profile/profile_screen.dart';
@@ -29,7 +28,6 @@ class BaseScreen extends StatelessWidget {
                     .add(BottomNavigationClickEvent(value));
               },
             ),
-            // backgroundColor: ColorManager.backgroundColor,
             body: state is ExploreState
                 ? const HomeScreen()
                 : state is HistoryState

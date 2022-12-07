@@ -1,17 +1,15 @@
-import 'dart:developer';
-import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:foodie/resources/app_prefs.dart';
 part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(ProfileLoadingState()) {
-    on<ProfileEvent>((event, emit) {
-      var brightness = SchedulerBinding.instance.window.platformBrightness;
-      bool isDarkMode = brightness == Brightness.dark;
+    on<ProfileEvent>((event, emit)  {
+
+      bool? isDarkMode = AppPreferences.getTheme();
       emit(ProfileLoadedState(isDarkMode: isDarkMode));
     });
 
